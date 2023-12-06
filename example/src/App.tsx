@@ -1,18 +1,26 @@
 import * as React from 'react';
 
-import { StyleSheet, View, Text } from 'react-native';
-import { multiply } from 'react-native-limit-timepicker';
+import {StyleSheet, View} from 'react-native';
+import TimePicker from 'react-native-limit-timepicker';
 
 export default function App() {
-  const [result, setResult] = React.useState<number | undefined>();
-
-  React.useEffect(() => {
-    multiply(3, 7).then(setResult);
-  }, []);
-
   return (
     <View style={styles.container}>
-      <Text>Result: {result}</Text>
+      <TimePicker
+        // minDate={
+        //   dayjs(new Date()).format('DD/MM/YYYY') ===
+        //   dayjs(dateLoading).format('DD/MM/YYYY')
+        //     ? dayjs(new Date()).add(5, 'm').toDate()
+        //     : undefined
+        // }
+        // maxDate={
+        //   dayjs(dateUnloading).format('DD/MM/YYYY') ===
+        //   dayjs(dateLoading).format('DD/MM/YYYY')
+        //     ? dateUnloading
+        //     : undefined
+        // }
+        disabled={false}
+      />
     </View>
   );
 }

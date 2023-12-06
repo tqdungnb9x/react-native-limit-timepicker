@@ -2,28 +2,14 @@
   "name": "react-native-limit-timepicker",
   "version": "0.1.0",
   "description": "React Native wheel scroll Time Picker ",
-  "main": "lib/commonjs/index",
-  "module": "lib/module/index",
+  "main": "lib/commonjs/index.js",
+  "module": "lib/module/index.js",
+  "react-native": "src/index.tsx",
   "types": "lib/typescript/src/index.d.ts",
-  "react-native": "src/index",
-  "source": "src/index",
+  "source": "src/index.tsx",
   "files": [
     "src",
-    "lib",
-    "android",
-    "ios",
-    "cpp",
-    "*.podspec",
-    "!ios/build",
-    "!android/build",
-    "!android/gradle",
-    "!android/gradlew",
-    "!android/gradlew.bat",
-    "!android/local.properties",
-    "!**/__tests__",
-    "!**/__fixtures__",
-    "!**/__mocks__",
-    "!**/.*"
+    "lib"
   ],
   "scripts": {
     "example": "yarn workspace react-native-limit-timepicker-example",
@@ -63,10 +49,10 @@
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.0.0",
     "jest": "^28.1.1",
-    "prettier": "^2.0.5",
+    "prettier": "^2.8.8",
     "react": "18.2.0",
     "react-native": "0.72.6",
-    "react-native-builder-bob": "^0.20.0",
+    "react-native-builder-bob": "^0.20.4",
     "release-it": "^15.0.0",
     "typescript": "^5.0.2"
   },
@@ -123,11 +109,11 @@
       "prettier/prettier": [
         "error",
         {
-          "quoteProps": "consistent",
-          "singleQuote": true,
-          "tabWidth": 2,
-          "trailingComma": "es5",
-          "useTabs": false
+          "arrowParens": "avoid",
+          "bracketSameLine": true,
+          "bracketSpacing": false,
+          "trailingComma": "all",
+          "singleQuote": true
         }
       ]
     }
@@ -137,11 +123,11 @@
     "lib/"
   ],
   "prettier": {
-    "quoteProps": "consistent",
-    "singleQuote": true,
-    "tabWidth": 2,
-    "trailingComma": "es5",
-    "useTabs": false
+    "arrowParens": "avoid",
+    "bracketSameLine": true,
+    "bracketSpacing": false,
+    "trailingComma": "all",
+    "singleQuote": true
   },
   "react-native-builder-bob": {
     "source": "src",
