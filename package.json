@@ -1,6 +1,6 @@
 {
   "name": "react-native-limit-timepicker",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "React Native wheel scroll Time Picker ",
   "main": "lib/commonjs/index.js",
   "module": "lib/module/index.js",
@@ -50,7 +50,7 @@
     "eslint-plugin-prettier": "^4.0.0",
     "jest": "^28.1.1",
     "prettier": "^2.8.8",
-    "react": "18.2.0",
+    "react": "^18.2.0",
     "react-native": "0.72.6",
     "react-native-builder-bob": "^0.20.4",
     "release-it": "^15.0.0",
@@ -142,5 +142,8 @@
         }
       ]
     ]
+  },
+  "dependencies": {
+    "react-dom": "^18.2.0"
   }
 }

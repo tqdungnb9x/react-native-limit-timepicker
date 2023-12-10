@@ -1,22 +1,22 @@
 import React, {useEffect, useState} from 'react';
-import {View, StyleSheet, type ViewStyle} from 'react-native';
-import ScrollPicker from './wheel_scroll/ScrollPicker';
+import {View, StyleSheet, type ViewStyle, type TextStyle} from 'react-native';
+import ScrollPicker, {type ItemT} from './wheel_scroll/ScrollPicker';
 
-const defaultHourData = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
-const defaultMinutesData = [
+const defaultHourData: ItemT[] = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
+const defaultMinutesData: ItemT[] = [
   0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
   22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40,
   41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59,
 ];
-const defaultPeriodData = ['AM', 'PM'];
+const defaultPeriodData: ItemT[] = ['AM', 'PM'];
 
-export type TimePickerProps<ItemT extends string | number> = {
+export type TimePickerProps = {
   customHourData?: ItemT[];
   customMinutesData?: ItemT[];
   customPeriodData?: ItemT[];
-  renderTextHour?: (data: ItemT) => string
-  renderTextMinute?: (data: ItemT) => string
-  renderTextPeriod?: (data: ItemT) => string
+  renderTextHour?: (data: ItemT) => string;
+  renderTextMinute?: (data: ItemT) => string;
+  renderTextPeriod?: (data: ItemT) => string;
   onChangeHour?: (value: ItemT | undefined, index: number) => void;
   onChangeMinute?: (value: ItemT | undefined, index: number) => void;
   onChangePeriod?: (value: ItemT | undefined, index: number) => void;
@@ -31,42 +31,42 @@ export type TimePickerProps<ItemT extends string | number> = {
   scrollPeriodStyle?: ViewStyle;
   highlightColor?: string;
   highlightBorderWidth?: number;
-  itemTextStyle?: object;
+  hourTextStyle?: TextStyle;
+  minuteTextStyle?: TextStyle;
+  periodTextStyle?: TextStyle;
   activeItemTextStyle?: object;
   itemHeight?: number;
   wrapperHeight?: number;
   wrapperBackground?: string;
-}
+};
 const TimePicker: {
-  <ItemT extends string | number>(
-    props: TimePickerProps<ItemT>
-  );
-} = React.forwardRef((propsState) => {
-
-// export default function TimePicker({
-//   customHourData,
-//   customMinutesData,
-//   customPeriodData,
-//   onChangeHour,
-//   onChangeMinute,
-//   onChangePeriod,
-//   disabled,
-//   time,
-//   minDate,
-//   maxDate,
-//   containerStyle,
-//   scrollHourStyle,
-//   scrollMinuteStyle,
-//   scrollPeriodStyle,
-//   highlightColor = '#d8d8d8',
-//   highlightBorderWidth = 1,
-//   itemTextStyle,
-//   activeItemTextStyle,
-//   itemHeight = 60,
-//   wrapperHeight,
-//   wrapperBackground = '#FFFFFF',
-// }: TimePickerProps) {
-  const {customHourData,
+  (props: TimePickerProps);
+} = React.forwardRef(propsState => {
+  // export default function TimePicker({
+  //   customHourData,
+  //   customMinutesData,
+  //   customPeriodData,
+  //   onChangeHour,
+  //   onChangeMinute,
+  //   onChangePeriod,
+  //   disabled,
+  //   time,
+  //   minDate,
+  //   maxDate,
+  //   containerStyle,
+  //   scrollHourStyle,
+  //   scrollMinuteStyle,
+  //   scrollPeriodStyle,
+  //   highlightColor = '#d8d8d8',
+  //   highlightBorderWidth = 1,
+  //   itemTextStyle,
+  //   activeItemTextStyle,
+  //   itemHeight = 60,
+  //   wrapperHeight,
+  //   wrapperBackground = '#FFFFFF',
+  // }: TimePickerProps) {
+  const {
+    customHourData,
     customMinutesData,
     customPeriodData,
     onChangeHour,
@@ -82,7 +82,9 @@ const TimePicker: {
     scrollPeriodStyle,
     highlightColor = '#d8d8d8',
     highlightBorderWidth = 1,
-    itemTextStyle,
+    hourTextStyle,
+    minuteTextStyle,
+    periodTextStyle,
     activeItemTextStyle,
     itemHeight = 60,
     wrapperHeight,
@@ -90,7 +92,8 @@ const TimePicker: {
     renderTextHour,
     renderTextMinute,
     renderTextPeriod,
-     ...props} = propsState;
+    // ...props
+  } = propsState;
 
   const hourData = customHourData ?? defaultHourData;
   const minutesData = customMinutesData ?? defaultMinutesData;
@@ -114,11 +117,20 @@ const TimePicker: {
   const [maxPeriod, setMaxPeriod] = useState<number | undefined>(undefined);
 
   useEffect(() => {
+    let lastMinuteData: number;
+
+    if (
+      minutesData[minutesData.length - 1] &&
+      typeof minutesData[minutesData.length - 1] === 'number'
+    ) {
+      lastMinuteData = minutesData[minutesData.length - 1] as number;
+    } else {
+      lastMinuteData =
+        parseInt(minutesData[minutesData.length - 1] as string) ?? 0;
+    }
     if (minDate !== undefined) {
       if (minDate.getHours() === 11) {
-        if (
-          minDate.getMinutes() >= (minutesData[minutesData.length - 1] ?? 0)
-        ) {
+        if (minDate.getMinutes() >= lastMinuteData) {
           setMinHour(undefined);
           setMinMinutes(undefined);
           setMinPeriod(1);
@@ -133,13 +145,11 @@ const TimePicker: {
           }
         }
       } else if (minDate.getHours() > 11) {
-        if (
-          minDate.getMinutes() >= (minutesData[minutesData.length - 1] ?? 0)
-        ) {
+        if (minDate.getMinutes() >= lastMinuteData) {
           setMinHour(minDate.getHours() - 11);
           setMinMinutes(
             minDate.getHours() - 11 >= selectedHour &&
-              minDate.getMinutes() < (minutesData[minutesData.length - 1] ?? 0)
+              minDate.getMinutes() < lastMinuteData
               ? 1
               : undefined,
           );
@@ -147,7 +157,7 @@ const TimePicker: {
           setMinHour(minDate.getHours() - 12);
           setMinMinutes(
             minDate.getHours() - 12 >= selectedHour &&
-              minDate.getMinutes() < (minutesData[minutesData.length - 1] ?? 0)
+              minDate.getMinutes() < lastMinuteData
               ? 1
               : undefined,
           );
@@ -155,14 +165,12 @@ const TimePicker: {
         setMinPeriod(1);
       } else {
         setMinPeriod(undefined);
-        if (
-          minDate.getMinutes() >= (minutesData[minutesData.length - 1] ?? 0)
-        ) {
+        if (minDate.getMinutes() >= lastMinuteData) {
           setMinHour(selectedPeriod !== 0 ? 0 : minDate.getHours() + 1);
           setMinMinutes(
             selectedPeriod === 0 &&
               minDate.getHours() + 1 >= selectedHour &&
-              minDate.getMinutes() < (minutesData[minutesData.length - 1] ?? 0)
+              minDate.getMinutes() < lastMinuteData
               ? 1
               : undefined,
           );
@@ -171,7 +179,7 @@ const TimePicker: {
           setMinMinutes(
             selectedPeriod === 0 &&
               minDate.getHours() >= selectedHour &&
-              minDate.getMinutes() < (minutesData[minutesData.length - 1] ?? 0)
+              minDate.getMinutes() < lastMinuteData
               ? 1
               : undefined,
           );
@@ -189,9 +197,7 @@ const TimePicker: {
           setMaxHour(undefined);
           setMaxMinutes(undefined);
           setMaxPeriod(0);
-        } else if (
-          maxDate.getMinutes() <= (minutesData[minutesData.length - 1] ?? 0)
-        ) {
+        } else if (maxDate.getMinutes() <= lastMinuteData) {
           setMaxPeriod(0);
           if (selectedPeriod === 0) {
             setMaxHour(undefined);
@@ -218,7 +224,7 @@ const TimePicker: {
           setMinHour(maxDate.getHours() - 12);
           setMaxMinutes(
             maxDate.getHours() - 12 <= selectedHour &&
-              maxDate.getMinutes() > (minutesData[minutesData.length - 1] ?? 0)
+              maxDate.getMinutes() > lastMinuteData
               ? 0
               : undefined,
           );
@@ -233,7 +239,7 @@ const TimePicker: {
           setMinHour(maxDate.getHours());
           setMaxMinutes(
             maxDate.getHours() <= selectedHour &&
-              maxDate.getMinutes() > (minutesData[minutesData.length - 1] ?? 0)
+              maxDate.getMinutes() > lastMinuteData
               ? 0
               : undefined,
           );
@@ -253,9 +259,20 @@ const TimePicker: {
     minutesData,
   ]);
 
-  const defaultRenderTextHour = (data: string | number): string => (typeof data === 'number' ? data < 10 ? `0${data}` : data.toString() : data);
-  const defaultRenderTextMinute = (data: string | number): string => (typeof data === 'number' ? data < 10 ? `0${data}` : data.toString() : data);
-  const defaultRenderTextPeriod = (data: string | number): string => data.toString();
+  const defaultRenderTextHour = (data: string | number): string =>
+    typeof data === 'number'
+      ? data < 10
+        ? `0${data}`
+        : data.toString()
+      : data;
+  const defaultRenderTextMinute = (data: string | number): string =>
+    typeof data === 'number'
+      ? data < 10
+        ? `0${data}`
+        : data.toString()
+      : data;
+  const defaultRenderTextPeriod = (data: string | number): string =>
+    data.toString();
   // useEffect(() => {
   //   setChecked(isImmediately);
   // }, [isImmediately]);
@@ -304,7 +321,7 @@ const TimePicker: {
           wrapperHeight={wrapperHeight}
           wrapperBackground={wrapperBackground}
           itemHeight={itemHeight}
-          itemTextStyle={[styles.time, itemTextStyle]}
+          itemTextStyle={[styles.time, hourTextStyle]}
           activeItemTextStyle={[styles.timeSelected, activeItemTextStyle]}
           highlightColor={highlightColor}
           highlightBorderWidth={highlightBorderWidth}
@@ -331,7 +348,7 @@ const TimePicker: {
             wrapperHeight={wrapperHeight}
             wrapperBackground={wrapperBackground}
             itemHeight={itemHeight}
-            itemTextStyle={[styles.time, itemTextStyle]}
+            itemTextStyle={[styles.time, minuteTextStyle]}
             activeItemTextStyle={[styles.timeSelected, activeItemTextStyle]}
             highlightColor={highlightColor}
             highlightBorderWidth={highlightBorderWidth}
@@ -348,7 +365,6 @@ const TimePicker: {
             dataSource={periodData}
             selectedIndex={selectedPeriod}
             renderText={renderTextPeriod ?? defaultRenderTextPeriod}
-
             onValueChange={(data, selectedIndex) => {
               setSelectedPeriod(selectedIndex);
               onChangePeriod?.(data, selectedIndex);
@@ -356,7 +372,7 @@ const TimePicker: {
             wrapperHeight={wrapperHeight}
             wrapperBackground={wrapperBackground}
             itemHeight={itemHeight}
-            itemTextStyle={[styles.time, itemTextStyle]}
+            itemTextStyle={[styles.time, periodTextStyle]}
             activeItemTextStyle={[styles.timeSelected, activeItemTextStyle]}
             highlightColor={highlightColor}
             highlightBorderWidth={highlightBorderWidth}
@@ -368,7 +384,6 @@ const TimePicker: {
 });
 
 export default TimePicker;
-
 
 const styles = StyleSheet.create({
   container: {

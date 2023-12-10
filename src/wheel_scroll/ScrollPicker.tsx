@@ -19,6 +19,8 @@ import {
   type ViewStyle,
 } from 'react-native';
 
+export type ItemT = string | number;
+
 function isNumeric(str: string | unknown): boolean {
   if (typeof str === 'number') {
     return true;
@@ -42,7 +44,7 @@ const isViewStyle = (style: ViewProps['style']): style is ViewStyle => {
   );
 };
 
-export type ScrollPickerProps<ItemT extends string | number> = {
+export type ScrollPickerProps = {
   style?: ViewProps['style'];
   dataSource: Array<ItemT>;
   minIndex?: number;
@@ -69,9 +71,7 @@ export type ScrollPickerHandle = {
 };
 
 const ScrollPicker: {
-  <ItemT extends string | number>(
-    props: ScrollPickerProps<ItemT> & {ref?: Ref<ScrollPickerHandle>},
-  );
+  (props: ScrollPickerProps & {ref?: Ref<ScrollPickerHandle>});
 } = React.forwardRef((propsState, ref) => {
   const {itemHeight = 30, style, scrollViewComponent, ...props} = propsState;
   const [initialized, setInitialized] = useState(false);
