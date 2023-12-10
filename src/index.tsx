@@ -1,10 +1,6 @@
-import dayjs from 'dayjs';
 import React, {useEffect, useState} from 'react';
 import {View, StyleSheet, type ViewStyle} from 'react-native';
-import customParseFormat from 'dayjs/plugin/customParseFormat';
 import ScrollPicker from './wheel_scroll/ScrollPicker';
-
-dayjs.extend(customParseFormat);
 
 const defaultHourData = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
 const defaultMinutesData = [
@@ -14,13 +10,16 @@ const defaultMinutesData = [
 ];
 const defaultPeriodData = ['AM', 'PM'];
 
-export type ScrollPickerProps = {
-  customHourData?: number[];
-  customMinutesData?: number[];
-  customPeriodData?: string[];
-  onChangeHour?: (value: number | undefined, index: number) => void;
-  onChangeMinute?: (value: number | undefined, index: number) => void;
-  onChangePeriod?: (value: string | undefined, index: number) => void;
+export type TimePickerProps<ItemT extends string | number> = {
+  customHourData?: ItemT[];
+  customMinutesData?: ItemT[];
+  customPeriodData?: ItemT[];
+  renderTextHour?: (data: ItemT) => string
+  renderTextMinute?: (data: ItemT) => string
+  renderTextPeriod?: (data: ItemT) => string
+  onChangeHour?: (value: ItemT | undefined, index: number) => void;
+  onChangeMinute?: (value: ItemT | undefined, index: number) => void;
+  onChangePeriod?: (value: ItemT | undefined, index: number) => void;
   date?: string;
   disabled?: boolean;
   time?: string;
@@ -38,30 +37,61 @@ export type ScrollPickerProps = {
   wrapperHeight?: number;
   wrapperBackground?: string;
 }
+const TimePicker: {
+  <ItemT extends string | number>(
+    props: TimePickerProps<ItemT>
+  );
+} = React.forwardRef((propsState) => {
 
-export default function TimePicker({
-  customHourData,
-  customMinutesData,
-  customPeriodData,
-  onChangeHour,
-  onChangeMinute,
-  onChangePeriod,
-  disabled,
-  time,
-  minDate,
-  maxDate,
-  containerStyle,
-  scrollHourStyle,
-  scrollMinuteStyle,
-  scrollPeriodStyle,
-  highlightColor = '#d8d8d8',
-  highlightBorderWidth = 1,
-  itemTextStyle,
-  activeItemTextStyle,
-  itemHeight = 60,
-  wrapperHeight,
-  wrapperBackground = '#FFFFFF',
-}: ScrollPickerProps) {
+// export default function TimePicker({
+//   customHourData,
+//   customMinutesData,
+//   customPeriodData,
+//   onChangeHour,
+//   onChangeMinute,
+//   onChangePeriod,
+//   disabled,
+//   time,
+//   minDate,
+//   maxDate,
+//   containerStyle,
+//   scrollHourStyle,
+//   scrollMinuteStyle,
+//   scrollPeriodStyle,
+//   highlightColor = '#d8d8d8',
+//   highlightBorderWidth = 1,
+//   itemTextStyle,
+//   activeItemTextStyle,
+//   itemHeight = 60,
+//   wrapperHeight,
+//   wrapperBackground = '#FFFFFF',
+// }: TimePickerProps) {
+  const {customHourData,
+    customMinutesData,
+    customPeriodData,
+    onChangeHour,
+    onChangeMinute,
+    onChangePeriod,
+    disabled,
+    time,
+    minDate,
+    maxDate,
+    containerStyle,
+    scrollHourStyle,
+    scrollMinuteStyle,
+    scrollPeriodStyle,
+    highlightColor = '#d8d8d8',
+    highlightBorderWidth = 1,
+    itemTextStyle,
+    activeItemTextStyle,
+    itemHeight = 60,
+    wrapperHeight,
+    wrapperBackground = '#FFFFFF',
+    renderTextHour,
+    renderTextMinute,
+    renderTextPeriod,
+     ...props} = propsState;
+
   const hourData = customHourData ?? defaultHourData;
   const minutesData = customMinutesData ?? defaultMinutesData;
   const periodData = customPeriodData ?? defaultPeriodData;
@@ -223,6 +253,9 @@ export default function TimePicker({
     minutesData,
   ]);
 
+  const defaultRenderTextHour = (data: string | number): string => (typeof data === 'number' ? data < 10 ? `0${data}` : data.toString() : data);
+  const defaultRenderTextMinute = (data: string | number): string => (typeof data === 'number' ? data < 10 ? `0${data}` : data.toString() : data);
+  const defaultRenderTextPeriod = (data: string | number): string => data.toString();
   // useEffect(() => {
   //   setChecked(isImmediately);
   // }, [isImmediately]);
@@ -263,7 +296,7 @@ export default function TimePicker({
           maxIndex={maxHour}
           dataSource={hourData}
           selectedIndex={selectedHour}
-          renderText={data => (data < 10 ? `0${data}` : data.toString())}
+          renderText={renderTextHour ?? defaultRenderTextHour}
           onValueChange={(data, selectedIndex) => {
             setSelectedHour(selectedIndex);
             onChangeHour?.(data, selectedIndex);
@@ -290,6 +323,7 @@ export default function TimePicker({
             maxIndex={maxMinutes}
             dataSource={minutesData}
             selectedIndex={selectedMinutes}
+            renderText={renderTextMinute ?? defaultRenderTextMinute}
             onValueChange={(data, selectedIndex) => {
               setSelectedMinutes(selectedIndex);
               onChangeMinute?.(data, selectedIndex);
@@ -313,6 +347,8 @@ export default function TimePicker({
             maxIndex={maxPeriod}
             dataSource={periodData}
             selectedIndex={selectedPeriod}
+            renderText={renderTextPeriod ?? defaultRenderTextPeriod}
+
             onValueChange={(data, selectedIndex) => {
               setSelectedPeriod(selectedIndex);
               onChangePeriod?.(data, selectedIndex);
@@ -329,7 +365,10 @@ export default function TimePicker({
       </View>
     </View>
   );
-}
+});
+
+export default TimePicker;
+
 
 const styles = StyleSheet.create({
   container: {
