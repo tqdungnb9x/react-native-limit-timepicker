@@ -33,7 +33,9 @@ export type TimePickerProps = {
   hourTextStyle?: TextStyle;
   minuteTextStyle?: TextStyle;
   periodTextStyle?: TextStyle;
-  activeItemTextStyle?: object;
+  activeHourTextStyle?: TextStyle;
+  activeMinuteTextStyle?: TextStyle;
+  activePeriodTextStyle?: TextStyle;
   itemHeight?: number;
   wrapperHeight?: number;
   wrapperBackground?: string;
@@ -61,7 +63,9 @@ const TimePicker: {
     hourTextStyle,
     minuteTextStyle,
     periodTextStyle,
-    activeItemTextStyle,
+    activeHourTextStyle,
+    activeMinuteTextStyle,
+    activePeriodTextStyle,
     itemHeight = 60,
     wrapperHeight,
     wrapperBackground = '#FFFFFF',
@@ -274,7 +278,7 @@ const TimePicker: {
           wrapperBackground={wrapperBackground}
           itemHeight={itemHeight}
           itemTextStyle={[styles.time, hourTextStyle]}
-          activeItemTextStyle={[styles.timeSelected, activeItemTextStyle]}
+          activeItemTextStyle={[styles.timeSelected, activeHourTextStyle]}
           highlightColor={highlightColor}
           highlightBorderWidth={highlightBorderWidth}
         />
@@ -283,53 +287,49 @@ const TimePicker: {
         <View style={styles.viewDot} />
         <View style={styles.viewDot} />
       </View>
-      <View>
-        <View
-          style={[styles.scrollMinutes, scrollMinuteStyle]}
-          pointerEvents={disabled ? 'none' : undefined}>
-          <ScrollPicker
-            minIndex={minMinutes}
-            maxIndex={maxMinutes}
-            dataSource={customMinutesData}
-            selectedIndex={selectedMinutes}
-            renderText={renderTextMinute ?? defaultRenderTextMinute}
-            onValueChange={(data, selectedIndex) => {
-              setSelectedMinutes(selectedIndex);
-              onChangeMinute?.(data, selectedIndex);
-            }}
-            wrapperHeight={wrapperHeight}
-            wrapperBackground={wrapperBackground}
-            itemHeight={itemHeight}
-            itemTextStyle={[styles.time, minuteTextStyle]}
-            activeItemTextStyle={[styles.timeSelected, activeItemTextStyle]}
-            highlightColor={highlightColor}
-            highlightBorderWidth={highlightBorderWidth}
-          />
-        </View>
+      <View
+        style={[styles.scrollMinutes, scrollMinuteStyle]}
+        pointerEvents={disabled ? 'none' : undefined}>
+        <ScrollPicker
+          minIndex={minMinutes}
+          maxIndex={maxMinutes}
+          dataSource={customMinutesData}
+          selectedIndex={selectedMinutes}
+          renderText={renderTextMinute ?? defaultRenderTextMinute}
+          onValueChange={(data, selectedIndex) => {
+            setSelectedMinutes(selectedIndex);
+            onChangeMinute?.(data, selectedIndex);
+          }}
+          wrapperHeight={wrapperHeight}
+          wrapperBackground={wrapperBackground}
+          itemHeight={itemHeight}
+          itemTextStyle={[styles.time, minuteTextStyle]}
+          activeItemTextStyle={[styles.timeSelected, activeMinuteTextStyle]}
+          highlightColor={highlightColor}
+          highlightBorderWidth={highlightBorderWidth}
+        />
       </View>
-      <View>
-        <View
-          style={[styles.scrollPeriod, scrollPeriodStyle]}
-          pointerEvents={disabled ? 'none' : undefined}>
-          <ScrollPicker
-            minIndex={minPeriod}
-            maxIndex={maxPeriod}
-            dataSource={customPeriodData}
-            selectedIndex={selectedPeriod}
-            renderText={renderTextPeriod ?? defaultRenderTextPeriod}
-            onValueChange={(data, selectedIndex) => {
-              setSelectedPeriod(selectedIndex);
-              onChangePeriod?.(data, selectedIndex);
-            }}
-            wrapperHeight={wrapperHeight}
-            wrapperBackground={wrapperBackground}
-            itemHeight={itemHeight}
-            itemTextStyle={[styles.time, periodTextStyle]}
-            activeItemTextStyle={[styles.timeSelected, activeItemTextStyle]}
-            highlightColor={highlightColor}
-            highlightBorderWidth={highlightBorderWidth}
-          />
-        </View>
+      <View
+        style={[styles.scrollPeriod, scrollPeriodStyle]}
+        pointerEvents={disabled ? 'none' : undefined}>
+        <ScrollPicker
+          minIndex={minPeriod}
+          maxIndex={maxPeriod}
+          dataSource={customPeriodData}
+          selectedIndex={selectedPeriod}
+          renderText={renderTextPeriod ?? defaultRenderTextPeriod}
+          onValueChange={(data, selectedIndex) => {
+            setSelectedPeriod(selectedIndex);
+            onChangePeriod?.(data, selectedIndex);
+          }}
+          wrapperHeight={wrapperHeight}
+          wrapperBackground={wrapperBackground}
+          itemHeight={itemHeight}
+          itemTextStyle={[styles.time, periodTextStyle]}
+          activeItemTextStyle={[styles.timeSelected, activePeriodTextStyle]}
+          highlightColor={highlightColor}
+          highlightBorderWidth={highlightBorderWidth}
+        />
       </View>
     </View>
   );
@@ -357,14 +357,13 @@ const styles = StyleSheet.create({
     color: '#E1EEFA',
   },
   scrollHour: {
-    width: 69,
+    flex: 1,
   },
   scrollMinutes: {
-    width: 69,
+    flex: 1,
   },
   scrollPeriod: {
-    width: 50,
-    paddingHorizontal: 4,
+    flex: 1,
   },
   viewDot: {
     width: 4,
