@@ -4,6 +4,8 @@
 [![npm version](https://img.shields.io/npm/v/react-native-limit-timepicker.svg)](https://www.npmjs.com/package/react-native-limit-timepicker)
 [![license](https://img.shields.io/github/license/tqdungnb9x/react-native-limit-timepicker.svg)](https://opensource.org/licenses/MIT)
 
+<a href="https://www.buymeacoffee.com/tqdungnb98x" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
+
 React Native Limit Timepicker is a library that provides a LIMITABLE and CUSTOMIZABLE timepicker component for React Native applications.
 
  <p align="center">
@@ -12,9 +14,8 @@ React Native Limit Timepicker is a library that provides a LIMITABLE and CUSTOMI
 </p>
 
 ## Features
-* Dropdown and Multiselect in one package
 * Smooth Animated Timepicker
-* Can limit the minimum time and maximum time
+* Can limit the minimum time and maximum time in scroll picker
 * Easy to use
 * Consistent look and feel on iOS and Android
 * Customizable font size, colors and animation duration
