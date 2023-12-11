@@ -20,9 +20,8 @@ export type TimePickerProps = {
   onChangeHour?: (value: ItemT | undefined, index: number) => void;
   onChangeMinute?: (value: ItemT | undefined, index: number) => void;
   onChangePeriod?: (value: ItemT | undefined, index: number) => void;
-  date?: string;
   disabled?: boolean;
-  time?: string;
+  time?: Date;
   minDate?: Date;
   maxDate?: Date;
   containerStyle?: ViewStyle;
@@ -42,33 +41,10 @@ export type TimePickerProps = {
 const TimePicker: {
   (props: TimePickerProps);
 } = React.forwardRef(propsState => {
-  // export default function TimePicker({
-  //   customHourData,
-  //   customMinutesData,
-  //   customPeriodData,
-  //   onChangeHour,
-  //   onChangeMinute,
-  //   onChangePeriod,
-  //   disabled,
-  //   time,
-  //   minDate,
-  //   maxDate,
-  //   containerStyle,
-  //   scrollHourStyle,
-  //   scrollMinuteStyle,
-  //   scrollPeriodStyle,
-  //   highlightColor = '#d8d8d8',
-  //   highlightBorderWidth = 1,
-  //   itemTextStyle,
-  //   activeItemTextStyle,
-  //   itemHeight = 60,
-  //   wrapperHeight,
-  //   wrapperBackground = '#FFFFFF',
-  // }: TimePickerProps) {
   const {
-    customHourData,
-    customMinutesData,
-    customPeriodData,
+    customHourData = defaultHourData,
+    customMinutesData = defaultMinutesData,
+    customPeriodData = defaultPeriodData,
     onChangeHour,
     onChangeMinute,
     onChangePeriod,
@@ -95,19 +71,21 @@ const TimePicker: {
     // ...props
   } = propsState;
 
-  const hourData = customHourData ?? defaultHourData;
-  const minutesData = customMinutesData ?? defaultMinutesData;
-  const periodData = customPeriodData ?? defaultPeriodData;
+  // const hourData = customHourData ?? defaultHourData;
+  // const minutesData = customMinutesData ?? defaultMinutesData;
+  // const periodData = customPeriodData ?? defaultPeriodData;
   const [selectedHour, setSelectedHour] = useState(
-    parseInt(time?.split(':')[0] ?? '0', 10) > 11
-      ? parseInt(time?.split(':')[0] ?? '0', 10) - 12
-      : parseInt(time?.split(':')[0] ?? '0', 10),
+    time
+      ? time?.getHours() > 11
+        ? time?.getHours() - 12
+        : time?.getHours()
+      : 0,
   );
   const [selectedMinutes, setSelectedMinutes] = useState(
-    parseInt(time?.split(':')[1] ?? '0', 10),
+    time ? time?.getMinutes() : 0,
   );
   const [selectedPeriod, setSelectedPeriod] = useState(
-    parseInt(time?.split(':')[0] ?? '0', 10) > 11 ? 1 : 0,
+    time && time?.getHours() > 11 ? 1 : 0,
   );
   const [minHour, setMinHour] = useState<number | undefined>(undefined);
   const [minMinutes, setMinMinutes] = useState<number | undefined>(undefined);
@@ -120,13 +98,16 @@ const TimePicker: {
     let lastMinuteData: number;
 
     if (
-      minutesData[minutesData.length - 1] &&
-      typeof minutesData[minutesData.length - 1] === 'number'
+      customMinutesData[customMinutesData.length - 1] &&
+      typeof customMinutesData[customMinutesData.length - 1] === 'number'
     ) {
-      lastMinuteData = minutesData[minutesData.length - 1] as number;
+      lastMinuteData = customMinutesData[
+        customMinutesData.length - 1
+      ] as number;
     } else {
       lastMinuteData =
-        parseInt(minutesData[minutesData.length - 1] as string) ?? 0;
+        parseInt(customMinutesData[customMinutesData.length - 1] as string) ??
+        0;
     }
     if (minDate !== undefined) {
       if (minDate.getHours() === 11) {
@@ -256,7 +237,7 @@ const TimePicker: {
     selectedPeriod,
     minDate,
     maxDate,
-    minutesData,
+    customMinutesData,
   ]);
 
   const defaultRenderTextHour = (data: string | number): string =>
@@ -273,35 +254,6 @@ const TimePicker: {
       : data;
   const defaultRenderTextPeriod = (data: string | number): string =>
     data.toString();
-  // useEffect(() => {
-  //   setChecked(isImmediately);
-  // }, [isImmediately]);
-
-  // const openTimePicker = () => {
-  //   modalizeRef.current?.open();
-  // };
-
-  // const handleClose = () => {
-  //   modalizeRef.current?.close();
-  // };
-
-  // const handleConfirm = () => {
-  //   let value;
-  //   if (selectedHour === 0 && selectedMinutes === 0 && selectedPeriod === 0) {
-  //     value = `${hourData[minHour ?? 0] + (minPeriod ?? 0) * 12}:${
-  //       minutesData[minMinutes ?? 0]
-  //     }`;
-  //   } else {
-  //     value = `${hourData[selectedHour] + selectedPeriod * 12}:${
-  //       minutesData[selectedMinutes]
-  //     }`;
-  //   }
-
-  //   const timeValue = dayjs(`${date} ${value}`, 'YYYY.MM.DD HH:mm').toDate();
-  //   checked ? onCheckNow?.() : onChangeValue?.(timeValue);
-  //   // setVal(value);
-  //   handleClose();
-  // };
 
   return (
     <View style={[styles.container, containerStyle]}>
@@ -311,7 +263,7 @@ const TimePicker: {
         <ScrollPicker
           minIndex={minHour}
           maxIndex={maxHour}
-          dataSource={hourData}
+          dataSource={customHourData}
           selectedIndex={selectedHour}
           renderText={renderTextHour ?? defaultRenderTextHour}
           onValueChange={(data, selectedIndex) => {
@@ -338,7 +290,7 @@ const TimePicker: {
           <ScrollPicker
             minIndex={minMinutes}
             maxIndex={maxMinutes}
-            dataSource={minutesData}
+            dataSource={customMinutesData}
             selectedIndex={selectedMinutes}
             renderText={renderTextMinute ?? defaultRenderTextMinute}
             onValueChange={(data, selectedIndex) => {
@@ -362,7 +314,7 @@ const TimePicker: {
           <ScrollPicker
             minIndex={minPeriod}
             maxIndex={maxPeriod}
-            dataSource={periodData}
+            dataSource={customPeriodData}
             selectedIndex={selectedPeriod}
             renderText={renderTextPeriod ?? defaultRenderTextPeriod}
             onValueChange={(data, selectedIndex) => {

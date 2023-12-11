@@ -1,7 +1,6 @@
 module.exports = {
   root: true,
   extends: '@react-native',
-  plugin: 'prettier',
   rules: {
     'prettier/prettier': 'error',
     'react/no-unstable-nested-components': [
