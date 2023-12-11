@@ -45,9 +45,9 @@ yarn add react-native-limit-timepicker
 | Props                | Params                  | isRequire                         | Description                                                                  |
 | -------------------- | ----------------------- | --------------------------------- | ---------------------------------------------------------------------------- |
 | disabled             | boolean                 | No                                | Disable the scrollable of Timepicker                                         |
-| customHourData       | Array<ItemT = string    | number>                           | No                                                                           | String or number array of the hour (Ex:  [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11])                       |
+| customHourData       | Array<ItemT = string \| number>                           | No                                                                           | String or number array of the hour (Ex:  [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11])                       |
 | customMinutesData    | Array<ItemT>            | No                                | String or number array of the minute (Ex:  [0, 30])                          |
-| customPeriodData     | Array<ItemT>            | Yes                               | String or number array of the minute (Ex:  ['am, 'pm'])                      |
+| customPeriodData     | Array<ItemT>            | No                               | String or number array of the minute (Ex:  ['am, 'pm'])                      |
 | renderTextHour       | (data: ItemT) => string | No                                | Customize the text of the hour item                                          |
 | renderTextMinute     | (data: ItemT) => string | No                                | Customize the text of the minute item                                        |
 | renderTextPeriod     | (data: ItemT) => string | No                                | Customize the text of the period item                                        |
