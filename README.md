@@ -2,7 +2,7 @@
 
 # react-native-limit-timepicker
 [![npm version](https://img.shields.io/npm/v/react-native-limit-timepicker.svg)](https://www.npmjs.com/package/react-native-limit-timepicker)
-
+[![license](https://img.shields.io/github/license/tqdungnb9x/react-native-limit-timepicker.svg)](https://opensource.org/licenses/MIT)
 React Native Limit Timepicker is a library that provides a LIMITABLE and CUSTOMIZABLE timepicker component for React Native applications.
 
 ## Features
@@ -66,12 +66,6 @@ yarn add react-native-limit-timepicker
 | wrapperHeight        | Number                  | No                                | Customize wrapper height of scroll container                                 |
 | wrapperBackground    | String                  | No                                | Customize background color of scroll container                               |
 
-
-<!-- ### Method
-| API   | Params     | Description         |
-| ----- | ---------- | ------------------- |
-| open  | () => void | Open dropdown list  |
-| close | () => void | Close dropdown list | --> |
 
 ### Timepicker example
 <!-- ![](https://github.com/hoaphantn7604/file-upload/blob/master/document/dropdown/react-native-dropdown-1.png) -->
