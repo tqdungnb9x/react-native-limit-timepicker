@@ -6,7 +6,8 @@
 React Native Limit Timepicker is a library that provides a LIMITABLE and CUSTOMIZABLE timepicker component for React Native applications.
 
  <p align="center">
-   <img src="./example/demo.gif">
+   <img width="360" 
+     height="640" src="./example/demo.gif">
 </p>
 
 ## Features
