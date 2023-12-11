@@ -1,10 +1,14 @@
-[<img src="https://github.com/hoaphantn7604/file-upload/blob/master/document/dropdown/react-native-limit-timepicker-demo.png">](https://github.com/hoaphantn7604/file-upload/blob/master/document/dropdown/react-native-limit-timepicker-demo.png)
+<!-- [<img src="https://github.com/hoaphantn7604/file-upload/blob/master/document/dropdown/react-native-limit-timepicker-demo.png">](https://github.com/hoaphantn7604/file-upload/blob/master/document/dropdown/react-native-limit-timepicker-demo.png) -->
 
 # react-native-limit-timepicker
-React Native Element Dropdown is a library that provides a customizable dropdown component for React Native applications. This library simplifies the process of creating dropdown menus and provides a variety of options to customize the dropdown to match the design and functionality of your application.
+[![npm version](https://img.shields.io/npm/v/react-native-limit-timepicker.svg)](https://www.npmjs.com/package/react-native-limit-timepicker)
+
+React Native Limit Timepicker is a library that provides a LIMITABLE and CUSTOMIZABLE timepicker component for React Native applications.
 
 ## Features
 * Dropdown and Multiselect in one package
+* Smooth Animated Timepicker
+* Can limit the minimum time and maximum time
 * Easy to use
 * Consistent look and feel on iOS and Android
 * Customizable font size, colors and animation duration
@@ -13,9 +17,6 @@ React Native Element Dropdown is a library that provides a customizable dropdown
 ```js
 If you love this library, give us a star, you will be a ray of sunshine in our lives :)
 ```
-
-### Free React Native Boilerplate
-[React Native Template](https://github.com/hoaphantn7604/react-native-template-components) with a beautiful UI.
 
 ## Getting started
 ```js
@@ -26,138 +27,51 @@ or
 ```js
 yarn add react-native-limit-timepicker
 ```
-### Demo
+<!-- ### Demo
 
-[<img src="https://github.com/hoaphantn7604/file-upload/blob/master/document/dropdown/react-native-limit-timepicker-thumbnal.jpg">](https://youtu.be/FhTDR_Ad_14)
-
+[<img src="https://github.com/hoaphantn7604/file-upload/blob/master/document/dropdown/react-native-limit-timepicker-thumbnal.jpg">](https://youtu.be/FhTDR_Ad_14) -->
 
 <br />
 
-![](https://github.com/hoaphantn7604/file-upload/blob/master/document/dropdown/react-native-drpdown.gif)
-![](https://github.com/hoaphantn7604/file-upload/blob/master/document/dropdown/react-native-multiselect.gif)
+<!-- ![](https://github.com/hoaphantn7604/file-upload/blob/master/document/dropdown/react-native-drpdown.gif)
+![](https://github.com/hoaphantn7604/file-upload/blob/master/document/dropdown/react-native-multiselect.gif) -->
 
-### Dropdown Props
+### Timepicker Props
 | Props              | Params                                          | isRequire | Description                                                         |
 | ------------------ | ----------------------------------------------- | --------- | ------------------------------------------------------------------- |
-| mode               | 'default' or 'modal' of 'auto'                  | No        | Mode 'modal' is show the dropdown in the middle of the screen.      |
-| data               | Array                                           | Yes       | Data is a plain array                                               |
-| labelField         | String                                          | Yes       | Extract the label from the data item                                |
-| valueField         | String                                          | Yes       | Extract the primary key from the data item                          |
-| searchField        | String                                          | Yes       | Specify the field of data list you want to search                   |
-| onChange           | (item: object) => void                          | Yes       | Selection callback                                                  |
-| onChangeText       | (search: string) => void                        | Yes       | Callback that is called when the text input's text changes          |
-| value              | Item                                            | No        | Set default value                                                   |
-| placeholder        | String                                          | No        | The string that will be rendered before dropdown has been selected  |
-| placeholderStyle   | TextStyle                                       | No        | Styling for text placeholder                                        |
-| selectedTextStyle  | TextStyle                                       | No        | Styling for selected text                                           |
-| selectedTextProps  | TextProps                                       | No        | Text Props for selected text. Ex: numberOfLines={1}                 |
-| style              | ViewStyle                                       | No        | Styling for view container                                          |
-| containerStyle     | ViewStyle                                       | No        | Styling for list container                                          |
-| maxHeight          | Number                                          | No        | Customize max height for list container                             |
-| minHeight          | Number                                          | No        | Customize min height for list container                             |
-| fontFamily         | String                                          | No        | Customize font style                                                |
-| iconStyle          | ImageStyle                                      | No        | Styling for icon                                                    |
-| iconColor          | String                                          | No        | Color of icons                                                      |
-| itemContainerStyle | TextStyle                                       | No        | Styling for item container in list                                  |
-| itemTextStyle      | TextStyle                                       | No        | Styling for text item in list                                       |
-| activeColor        | String                                          | No        | Background color for item selected in list container                |
-| search             | Boolean                                         | No        | Show or hide input search                                           |
-| searchQuery        | (keyword: string, labelValue: string) => Boolean| No        | Callback used to filter the list of items                           |
-| inputSearchStyle   | ViewStyle                                       | No        | Styling for input search                                            |
-| searchPlaceholder  | String                                          | No        | The string that will be rendered before text input has been entered |
-| renderInputSearch  | (onSearch: (text:string) => void) => JSX.Element| No        | Customize TextInput search                                          |
-| disable            | Boolean                                         | No        | Specifies the disabled state of the Dropdown                        |
-| dropdownPosition   | 'auto' or 'top' or 'bottom'                     | No        | Dropdown list position. Default is 'auto'                           |
-| autoScroll         | Boolean                                         | No        | Auto scroll to index item selected, default is true                 |
-| showsVerticalScrollIndicator | Boolean                               | No        | When true, shows a vertical scroll indicator, default is true       |
-| renderLeftIcon     | (visible?: boolean) => JSX.Element              | No        | Customize left icon for dropdown                                    |
-| renderRightIcon    | (visible?: boolean) => JSX.Element              | No        | Customize right icon for dropdown                                   |
-| renderItem         | (item: object, selected: Boolean) => JSX.Element| No        | Takes an item from data and renders it into the list                |
-| flatListProps      | FlatListProps                                   | No        | Customize FlatList element                                          |
-| inverted           | Boolean                                         | No        | Reverses the direction of scroll on top position mode. Default is true|
-| onFocus            | () => void                                      | No        | Callback that is called when the dropdown is focused                |
-| onBlur             | () => void                                      | No        | Callback that is called when the dropdown is blurred                |
-| keyboardAvoiding   | Boolean                                         | No        | keyboardAvoiding default is true                                    |
-| backgroundColor    | String                                          | No        | Set background color                                                |
-| confirmSelectItem  | Boolean                                         | No        | Turn On confirm select item. Refer example/src/dropdown/example3    |
-| onConfirmSelectItem | (item: object) => void                         | No        | Selection callback. Refer example/src/dropdown/example3             |
-| testID             | String                                          | No        | Used to locate this view in end-to-end tests                        |
-| itemTestIDField    | String                                          | No        | Add this field to the input data. Ex: DATA = [{itemTestIDField: '', label: '', value:: ''}]|
-| accessibilityLabel | String     | No    | Set an accessibilityLabel on the view, so that people who use VoiceOver know what element they have selected |
-| itemAccessibilityLabelField | String                                 | No        | Add this field to the input data. Ex: DATA = [{itemAccessibilityLabelField: '', label: '', value:: ''}]|
+| disabled     | boolean                 | No        | Disable the scrollable of Timepicker                           |
+| customHourData     | Array<ItemT = string | number>                  | No        | String or number array of the hour (Ex:  [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11])                            |
+| customMinutesData  | Array<ItemT>                                           | No        | String or number array of the minute (Ex:  [0, 30]) |
+| customPeriodData   | Array<ItemT>                               | Yes       | String or number array of the minute (Ex:  ['am, 'pm'])                                               |
+| renderTextHour     | (data: ItemT) => string                                          | No       | Customize the text of the hour item |
+| renderTextMinute     | (data: ItemT) => string                                          | No       | Customize the text of the minute item                             |
+| renderTextPeriod   | (data: ItemT) => string                                          | No       | Customize the text of the period item                                |
+| onChangeHour       | (value: ItemT | undefined, index: number) => void                        | No       | Called when the hour's momentum scroll ends (scroll which occurs as the ScrollView glides to a stop)          |
+| onChangeMinute       | (value: ItemT | undefined, index: number) => void                        | No       | Called when the minute's momentum scroll ends (scroll which occurs as the ScrollView glides to a stop)          |
+| onChangePeriod       | (value: ItemT | undefined, index: number) => void                        | No       | Called when the period's momentum scroll ends (scroll which occurs as the ScrollView glides to a stop)         |
+| time     | Date                 | No        | Set default time                           |
+| minDate        | Date                                          | No        | the minimum date can selected  |
+| maxDate        | Date                                          | No        | the maximum date can selected  |
+| containerStyle     | ViewStyle                                       | No        | Styling for view container                                          |
+| scrollHourStyle     | ViewStyle                                       | No        | Styling for hour scroll View                                          |
+| scrollMinuteStyle     | ViewStyle                                       | No        | Styling for minute scroll View                                          |
+| scrollPeriodStyle     | ViewStyle                                       | No        | Styling for period scroll View                                          |
+| highlightColor        | String                                          | No        | Border color for top and bottom centered item in scroll timepicker container                |
+| highlightBorderWidth        | Number                                          | No        | Border width for top and bottom line selected in scroll timepicker container                |
+| hourTextStyle  | TextStyle                                       | No        | Styling for hour text                                           |
+| minuteTextStyle  | TextStyle                                       | No        | Styling for minute text                                           |
+| periodTextStyle  | TextStyle                                       | No        | Styling for period text                                           |
+| activeItemTextStyle  | TextStyle                                       | No        | Styling for selected text                                           |
+| itemHeight          | Number                                          | No        | Customize item height in each scroll container                             |
+| wrapperHeight          | Number                                          | No        | Customize wrapper height of scroll container                             |
+| wrapperBackground          | String                                          | No        | Customize background color of scroll container                             |
 
 
-
-### MultiSelect Props
-| Props              | Params                                               | isRequire | Description                                                         |
-| ------------------ | -----------------------------------------------------| --------- | ------------------------------------------------------------------- |
-| mode               | 'default' or 'modal' of 'auto'                       | No        | Mode 'modal' is show the dropdown in the middle of the screen.      |
-| data               | Array                                                | Yes       | Data is a plain array                                               |
-| labelField         | String                                               | Yes       | Extract the label from the data item                                |
-| valueField         | String                                               | Yes       | Extract the primary key from the data item                          |
-| searchField        | String                                               | Yes       | Specify the field of data list you want to search                   |
-| onChange           | (value[]) => void                                    | Yes       | Selection callback. A array containing the "valueField".            |
-| onChangeText       | (search: string) => void                             | Yes       | Callback that is called when the text input's text changes          |
-| value              | Item[]                                               | No        | Set default value. A array containing the "valueField".             |
-| placeholder        | String                                               | No        | The string that will be rendered before dropdown has been selected  |
-| placeholderStyle   | TextStyle                                            | No        | Styling for text placeholder                                        |
-| style              | ViewStyle                                            | No        | Styling for view container                                          |
-| containerStyle     | ViewStyle                                            | No        | Styling for list container                                          |
-| maxHeight          | Number                                               | No        | Customize max height for list container                             |
-| minHeight          | Number                                               | No        | Customize min height for list container                             |
-| maxSelect          | Number                                               | No        | maximum number of items that can be selected                        |
-| fontFamily         | String                                               | No        | Customize font style                                                |
-| iconStyle          | ImageStyle                                           | No        | Styling for icon                                                    |
-| iconColor          | String                                               | No        | Color of icons                                                      |
-| activeColor        | String                                               | No        | Background color for item selected in list container                |
-| itemContainerStyle | TextStyle                                            | No        | Styling for item container in list                                  |
-| itemTextStyle      | TextStyle                                            | No        | Styling for text item in list                                       |
-| selectedStyle      | ViewStyle                                            | No        | Styling for selected view                                           |
-| selectedTextStyle  | TextStyle                                            | No        | Styling for selected text                                           |
-| renderSelectedItem | (item: object, unSelect?: () => void) => JSX.Element | No        | Takes an item from data and renders it into the list selected       |
-| alwaysRenderSelectedItem | Boolean                                        | No        | Always show the list of selected items                              |
-| visibleSelectedItem | Boolean                                             | No        | Option to hide selected item list, Ẽx: visibleSelectedItem={false}  |
-| search             | Boolean                                              | No        | Show or hide input search                                           |
-| searchQuery        | (keyword: string, labelValue: string) => Boolean     | No        | Callback used to filter the list of items                           |
-| inputSearchStyle   | ViewStyle                                            | No        | Styling for input search                                            |
-| searchPlaceholder  | String                                               | No        | The string that will be rendered before text input has been entered |
-| renderInputSearch  | (onSearch: (text:string) => void) => JSX.Element     | No        | Customize TextInput search                                          |
-| disable            | Boolean                                              | No        | Specifies the disabled state of the Dropdown                        |
-| dropdownPosition   | 'auto' or 'top' or 'bottom'                          | No        | Dropdown list position. Default is 'auto'                           |
-| showsVerticalScrollIndicator | Boolean                                    | No        | When true, shows a vertical scroll indicator, default is true       |
-| renderLeftIcon     | (visible?: boolean) => JSX.Element                   | No        | Customize left icon for dropdown                                    |
-| renderRightIcon    | (visible?: boolean) => JSX.Element                   | No        | Customize right icon for dropdown                                   |
-| renderItem         | (item: object, selected: Boolean) => JSX.Element     | No        | Takes an item from data and renders it into the list                |
-| flatListProps      | FlatListProps                                        | No        | Customize FlatList element                                          |
-| inverted           | Boolean                                              | No        | Reverses the direction of scroll on top position mode. Default is true|
-| onFocus            | () => void                                           | No        | Callback that is called when the dropdown is focused                |
-| onBlur             | () => void                                           | No        | Callback that is called when the dropdown is blurred                |
-| keyboardAvoiding   | Boolean                                              | No        | keyboardAvoiding default is true                                    |
-| inside             | Boolean                                              | No        | inside default is false                                             |
-| backgroundColor    | String                                               | No        | Set background color                                                |
-| confirmSelectItem  | Boolean                                              | No        | Turn On confirm select item. Refer example/src/dropdown/example7    |
-| confirmUnSelectItem | Boolean                                             | No        | Turn On confirm un-select item. Refer example/src/dropdown/example7 |
-| onConfirmSelectItem | (item: any) => void                                 | No        | Selection callback. Refer example/src/dropdown/example7             |
-| testID             | String                                               | No        | Used to locate this view in end-to-end tests                        |
-| itemTestIDField    | String                                               | No        | Add this field to the input data. Ex: DATA = [{itemTestIDField: '', label: '', value:: ''}]|
-| accessibilityLabel | String          | No    | Set an accessibilityLabel on the view, so that people who use VoiceOver know what element they have selected |
-| itemAccessibilityLabelField | String                                      | No        | Add this field to the input data. Ex: DATA = [{itemAccessibilityLabelField: '', label: '', value:: ''}]|
-
-
-
-### SelectCountry extends Dropdown
-| Props              | Params               | isRequire | Description                          |
-| ------------------ | -------------------- | --------- | ------------------------------------ |
-| imageField         | String               | Yes       | Extract the image from the data item |
-| imageStyle         | ImageStyle           | No        | Styling for image                    |
-
-
-### Method
+<!-- ### Method
 | API         | Params      | Description          |
 | ----------- | ------------| ---------------------|
 | open        | () => void  | Open dropdown list   |
-| close       | () => void  | Close dropdown list  |
-
+| close       | () => void  | Close dropdown list  | -->
 
 ### Dropdown example
 ![](https://github.com/hoaphantn7604/file-upload/blob/master/document/dropdown/react-native-dropdown-1.png)
