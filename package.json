@@ -1,6 +1,6 @@
 {
   "name": "react-native-limit-timepicker",
-  "version": "0.2.0",
+  "version": "0.4.0",
   "description": "React Native wheel scroll Time Picker ",
   "main": "lib/commonjs/index.js",
   "module": "lib/module/index.js",
@@ -23,7 +23,10 @@
   "keywords": [
     "react-native",
     "ios",
-    "android"
+    "android",
+    "timepicker",
+    "limit",
+    "scroll Picker"
   ],
   "repository": "https://github.com/tqdungnb9x/react-native-limit-timepicker",
   "author": "Dung Tran <tqdungnb98@gmail.com> (https://github.com/tqdungnb9x/react-native-limit-timepicker)",
