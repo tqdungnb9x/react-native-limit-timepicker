@@ -4,12 +4,10 @@
 [![npm version](https://img.shields.io/npm/v/react-native-limit-timepicker.svg)](https://www.npmjs.com/package/react-native-limit-timepicker)
 [![license](https://img.shields.io/github/license/tqdungnb9x/react-native-limit-timepicker.svg)](https://opensource.org/licenses/MIT)
 
-<a href="https://www.buymeacoffee.com/tqdungnb98x" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
-
 React Native Limit Timepicker is a library that provides a LIMITABLE and CUSTOMIZABLE timepicker component for React Native applications.
 
  <p align="center">
-   <img width="360" 
+   <img width="360" 🥰
      height="640" src="./example/demo.gif">
 </p>
 
@@ -22,8 +20,9 @@ React Native Limit Timepicker is a library that provides a LIMITABLE and CUSTOMI
 * Implemented with typescript
 
 ```js
-If you love this library, give us a star, you will be a ray of sunshine in our lives :)
+If you love this library, and want to support it, let's give us a star, you will be a ray of sunshine in our lives 🥰
 ```
+<a href="https://www.buymeacoffee.com/tqdungnb98x" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 40px !important;width: 162.75px !important;" ></a>
 
 ## Getting started
 ```js
@@ -109,4 +108,9 @@ yarn add react-native-limit-timepicker
 <br/>
 
 <!-- [<img src="https://github.com/hoaphantn7604/file-upload/blob/master/document/profile/hoa_phan_dev_banner.png">](https://github.com/hoaphantn7604) -->
- 
+### Support react-native-limit-timepicker <3
+
+<p align="center">
+   <img width="200" 
+     height="200" src="./example/bmc_qr.png">
+</p>
