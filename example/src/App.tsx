@@ -7,19 +7,12 @@ export default function App() {
   return (
     <View style={styles.container}>
       <TimePicker
-        // minDate={
-        //   dayjs(new Date()).format('DD/MM/YYYY') ===
-        //   dayjs(dateLoading).format('DD/MM/YYYY')
-        //     ? dayjs(new Date()).add(5, 'm').toDate()
-        //     : undefined
-        // }
-        // maxDate={
-        //   dayjs(dateUnloading).format('DD/MM/YYYY') ===
-        //   dayjs(dateLoading).format('DD/MM/YYYY')
-        //     ? dateUnloading
-        //     : undefined
-        // }
-        disabled={false}
+        customMinutesData={[0, 15, 30, 45]}
+        onChangeHour={value => console.log('hour: ', value)}
+        onChangeMinute={value => console.log('minute: ', value)}
+        onChangePeriod={value => console.log('period: ', value)}
+        minDate={new Date()}
+        time={new Date()}
       />
     </View>
   );
