@@ -93,6 +93,10 @@ const ScrollPicker: {
   useImperativeHandle(ref, () => ({
     scrollToTargetIndex: (val: number) => {
       setSelectedIndex(val);
+      if (props.onValueChange) {
+        const selectedValue = props.dataSource[val];
+        props.onValueChange(selectedValue, val);
+      }
       sView?.current?.scrollTo({y: val * itemHeight});
     },
   }));
@@ -116,6 +120,10 @@ const ScrollPicker: {
     setSelectedIndex(temp);
 
     const y = itemHeight * temp;
+    if (props.onValueChange) {
+      const selectedValue = props.dataSource[temp];
+      props.onValueChange(selectedValue, temp);
+    }
     sView?.current?.scrollTo({y: y});
   }, [
     props.minIndex,
@@ -205,10 +213,10 @@ const ScrollPicker: {
       if (selectedIndex === _selectedIndex) {
         return;
       }
+      setSelectedIndex(_selectedIndex);
       // onValueChange
       if (props.onValueChange) {
         const selectedValue = props.dataSource[_selectedIndex];
-        setSelectedIndex(_selectedIndex);
         props.onValueChange(selectedValue, _selectedIndex);
       }
     },
