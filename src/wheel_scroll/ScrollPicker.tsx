@@ -267,7 +267,6 @@ const ScrollPicker: {
 
   const wrapperStyle: ViewStyle = {
     height: wrapperHeight,
-    flex: 1,
     backgroundColor: props.wrapperBackground || '#fafafa',
     overflow: 'hidden',
   };
